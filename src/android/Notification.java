@@ -33,6 +33,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.os.Build;
 
 
 /**
@@ -156,8 +157,12 @@ public class Notification extends CordovaPlugin {
 
         Runnable runnable = new Runnable() {
             public void run() {
-
-                AlertDialog.Builder dlg = new AlertDialog.Builder(cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                AlertDialog.Builder dlg;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    dlg = new AlertDialog.Builder(cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                } else {
+                    dlg = new AlertDialog.Builder(cordova.getActivity());
+                }
                 dlg.setMessage(message);
                 dlg.setTitle(title);
                 dlg.setCancelable(true);
@@ -179,7 +184,9 @@ public class Notification extends CordovaPlugin {
                 dlg.create();
                 AlertDialog dialog =  dlg.show();
                 TextView messageview = (TextView)dialog.findViewById(android.R.id.message);
-                messageview.setTextDirection(android.view.View.TEXT_DIRECTION_LOCALE);
+                try{
+                  messageview.setTextDirection(android.view.View.TEXT_DIRECTION_LOCALE);
+                }catch(Throwable e){}
             };
         };
         this.cordova.getActivity().runOnUiThread(runnable);
@@ -200,7 +207,12 @@ public class Notification extends CordovaPlugin {
 
         Runnable runnable = new Runnable() {
             public void run() {
-                AlertDialog.Builder dlg = new AlertDialog.Builder(cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                AlertDialog.Builder dlg;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    dlg = new AlertDialog.Builder(cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                } else {
+                    dlg = new AlertDialog.Builder(cordova.getActivity());
+                }
                 dlg.setMessage(message);
                 dlg.setTitle(title);
                 dlg.setCancelable(true);
@@ -254,7 +266,9 @@ public class Notification extends CordovaPlugin {
                 dlg.create();
                 AlertDialog dialog =  dlg.show();
                 TextView messageview = (TextView)dialog.findViewById(android.R.id.message);
-                messageview.setTextDirection(android.view.View.TEXT_DIRECTION_LOCALE);
+                try{
+                  messageview.setTextDirection(android.view.View.TEXT_DIRECTION_LOCALE);
+                }catch(Throwable e){}
             };
         };
         this.cordova.getActivity().runOnUiThread(runnable);
@@ -280,7 +294,12 @@ public class Notification extends CordovaPlugin {
             public void run() {
                 final EditText promptInput =  new EditText(cordova.getActivity());
                 promptInput.setHint(defaultText);
-                AlertDialog.Builder dlg = new AlertDialog.Builder(cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                AlertDialog.Builder dlg;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    dlg = new AlertDialog.Builder(cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                } else {
+                    dlg = new AlertDialog.Builder(cordova.getActivity());
+                }
                 dlg.setMessage(message);
                 dlg.setTitle(title);
                 dlg.setCancelable(true);
@@ -353,7 +372,9 @@ public class Notification extends CordovaPlugin {
                 dlg.create();
                 AlertDialog dialog =  dlg.show();
                 TextView messageview = (TextView)dialog.findViewById(android.R.id.message);
-                messageview.setTextDirection(android.view.View.TEXT_DIRECTION_LOCALE);
+                try{
+                  messageview.setTextDirection(android.view.View.TEXT_DIRECTION_LOCALE);
+                }catch(Throwable e){}
             };
         };
         this.cordova.getActivity().runOnUiThread(runnable);
